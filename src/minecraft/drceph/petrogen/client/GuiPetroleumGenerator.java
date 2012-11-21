@@ -43,8 +43,13 @@ public class GuiPetroleumGenerator extends GuiContainer {
         }
         
         //energy
-        int energyScaled = 0;
+        int energyScaled = tileEntity.getScaledEnergy();
+        drawTexturedModalRect(x+113,y+35,176,58,energyScaled,17);
         
+        //active
+        if (tileEntity.active == 1) {
+        	drawTexturedModalRect(x+83,y+38,176,75,11,11);
+        }
 	}
 
 }

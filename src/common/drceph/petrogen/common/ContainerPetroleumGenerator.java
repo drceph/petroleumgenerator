@@ -16,7 +16,7 @@ public class ContainerPetroleumGenerator extends Container {
 	private EntityPlayer invokingPlayer;
 	private int lastAmount = 0;
 	private int lastLiquidId = 0;
-	private int lastLiquidMeta = 0;
+	private int lastActive = 0;
 	private int lastCharge = 0;
 	
 	public ContainerPetroleumGenerator(IInventory playerInventory, TileEntityPetroleumGenerator tileEntity) {
@@ -59,6 +59,7 @@ public class ContainerPetroleumGenerator extends Container {
 		crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
 		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquidId());
 		crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
+		crafter.sendProgressBarUpdate(this, 3, this.tileEntity.active);
 	}
 
 	@Override
@@ -76,11 +77,15 @@ public class ContainerPetroleumGenerator extends Container {
 			if (this.lastCharge != this.tileEntity.charge) {
 				crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
 			}
+			if (this.lastActive != this.tileEntity.active) {
+				crafter.sendProgressBarUpdate(this, 3, this.tileEntity.active);
+			}
 		}
 		
 		this.lastAmount = this.tileEntity.amount;
 		this.lastLiquidId = this.tileEntity.getCurrentLiquidId();
 		this.lastCharge = this.tileEntity.charge;
+		this.lastActive = this.tileEntity.active;
 	}
 
 	@Override
@@ -103,6 +108,9 @@ public class ContainerPetroleumGenerator extends Container {
 		}
 		if (par1 == 2) {
 			this.tileEntity.charge = par2;
+		}
+		if (par1 == 3) {
+			this.tileEntity.active = par2;
 		}
 	}
 	

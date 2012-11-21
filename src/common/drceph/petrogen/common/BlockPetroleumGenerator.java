@@ -66,7 +66,20 @@ public class BlockPetroleumGenerator extends BlockContainer {
 		// TODO Auto-generated method stub
 		return this.createNewTileEntity(world);
 	}
-	
+
+	@Override
+	public int getBlockTextureFromSide(int par1) {
+		switch (par1) {
+			case 0:
+			case 1:
+				return 2;
+			case 2:
+			case 3:
+				return 0;
+			default:
+				return 1;
+		}
+	}
 	
 	
 

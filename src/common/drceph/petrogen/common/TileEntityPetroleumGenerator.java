@@ -53,6 +53,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	public int amount;
 	public int charge;
 	private int buffer;
+	public int active;
 	private FuelPetroleumGenerator fuel;
 	public int currentEu;
 	public static final int[] fuelIds = {LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)).itemID,};
@@ -83,7 +84,10 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 
 	@Override
 	public void updateEntity() {
-
+		
+		
+		boolean didBurn = false;
+		boolean didExpel = false;
 		boolean changed = false;
 		// Add to energynet on first update, and initialise network voodoo
 		if (!initialised && worldObj != null) {
@@ -108,6 +112,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				if (buffer <= 0 && charge < MAX_CHARGE-fuel.getEuPacketSize()) {
 					amount--;
 					buffer = fuel.getEuPerLiquidUnit();
+					didBurn = true;
 				}
 			}
 			
@@ -115,28 +120,37 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				buffer -= currentEu;
 				charge += currentEu;
 				charge = Math.min(charge, MAX_CHARGE);
-				changed = true;
+				//changed = true;
 			}
 			
 			//STEP 3: Try to emit power (from charge)
 			
 			if (charge >= currentEu) {
 				int unused = EnergyNet.getForWorld(worldObj).emitEnergyFrom(this,currentEu);
+				didExpel = currentEu != unused;
 				charge -= (currentEu-unused);
-				changed = true;
+				//changed = true;
 			}
 			
 			//STEP 4: cleanup
 			if (buffer <= 0 && amount <= 0) {
 				fuel = null;
-				changed = true;
+				//changed = true;
 			}
-			
-		}
 		
+		
+			if (didExpel || didBurn) {
+				active = 1;
+			} else {
+				active = 0;
+			}
+		
+		}
 		if (changed) {
 			onInventoryChanged();
 		}
+		
+
 
 	}
 	
@@ -354,6 +368,12 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		double ratio = MAX_VOLUME / (FUEL_GAUGE_SCALE*1.0);
 		double scaled_volume = amount / ratio;
 		return ((int) Math.round(scaled_volume));
+	}
+	
+	public int getScaledEnergy() {
+		double ratio = MAX_CHARGE / (ENERGY_GAUGE_SCALE*1.0);
+		double scaled_charge = charge / ratio;
+		return ((int) Math.round(scaled_charge));
 	}
 	
 	@Override
