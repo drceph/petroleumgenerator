@@ -47,13 +47,14 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	public static final int SLOT_COUNT = 1;
 	private boolean initialised;
 	public static final int MAX_VOLUME = LiquidContainerRegistry.BUCKET_VOLUME * 10;
-	public static final int MAX_ENERGY = 30000;
+	public static final int MAX_CHARGE = 30000;
 	public static final int FUEL_GAUGE_SCALE = 58;
 	public static final int ENERGY_GAUGE_SCALE = 24;
 	public int amount;
 	public int charge;
 	private int buffer;
 	private FuelPetroleumGenerator fuel;
+	public int currentEu;
 	public static final int[] fuelIds = {LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)).itemID,};
 	
 
@@ -62,6 +63,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		amount = 0;
 		charge = 0;
 		buffer = 0;
+		currentEu = 0;
 		fuel = null;
 	}
 	
@@ -101,30 +103,34 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				changed = fillTankFromInventory(this.inventory[0]);
 			}
 			
+			//STEP 2: Try to charge battery
+			if (amount > 0) {
+				if (buffer <= 0 && charge < MAX_CHARGE-fuel.getEuPacketSize()) {
+					amount--;
+					buffer = fuel.getEuPerLiquidUnit();
+				}
+			}
+			
+			if (buffer > 0) {
+				buffer -= currentEu;
+				charge += currentEu;
+				charge = Math.min(charge, MAX_CHARGE);
+				changed = true;
+			}
+			
 			//STEP 3: Try to emit power (from charge)
 			
-			if (charge > 0) {
-				
+			if (charge >= currentEu) {
+				int unused = EnergyNet.getForWorld(worldObj).emitEnergyFrom(this,currentEu);
+				charge -= (currentEu-unused);
+				changed = true;
 			}
 			
-			
-			//STEP 2: Try to charge battery
-			
-			//burn fuel to fill buffer
-			if (buffer == 0 && amount > 0) {
-				
-			}
-			
-			//use buffer
-			if (buffer > 0) {
-				
-			}
-			
-			
-			
-			
-		
 			//STEP 4: cleanup
+			if (buffer <= 0 && amount <= 0) {
+				fuel = null;
+				changed = true;
+			}
 			
 		}
 		
@@ -158,9 +164,12 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	
 	public void setCurrentLiquid(int id) {
 		this.fuel = FuelPetroleumGenerator.getFuelByItemId(id);
+		if (fuel != null) {
+			this.currentEu = fuel.getEuPacketSize();
+		}
 	}
 	
-	public int getCurrentLiquid() {
+	public int getCurrentLiquidId() {
 		if (fuel != null) {
 			return fuel.getItemId();
 		} else {
@@ -286,6 +295,8 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		setCurrentLiquid(liquidId);
 		amount = tagCompound.getInteger("amount");
 		charge = tagCompound.getInteger("charge");
+		buffer = tagCompound.getInteger("buffer");
+		currentEu = tagCompound.getInteger("currentEu");
 	}
 
 	@Override
@@ -307,9 +318,12 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		}
 
 		tagCompound.setTag("Inventory", itemList);
-		tagCompound.setInteger("liquidId", fuel.getItemId());
+		int liquidId = fuel==null?0:fuel.getItemId();
+		tagCompound.setInteger("liquidId", liquidId);
 		tagCompound.setInteger("amount", amount);
 		tagCompound.setInteger("charge",charge);
+		tagCompound.setInteger("buffer",buffer);
+		tagCompound.setInteger("currentEu",currentEu);
 	}
 
 	@Override

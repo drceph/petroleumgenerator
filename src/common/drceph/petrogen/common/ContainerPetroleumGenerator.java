@@ -57,7 +57,7 @@ public class ContainerPetroleumGenerator extends Container {
 		super.addCraftingToCrafters(crafter);
 		
 		crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
-		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquid());
+		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquidId());
 		crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
 	}
 
@@ -70,8 +70,8 @@ public class ContainerPetroleumGenerator extends Container {
 			if (this.lastAmount != this.tileEntity.amount) {
 				crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
 			}
-			if (this.lastLiquidId != this.tileEntity.getCurrentLiquid()) {
-				crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquid());
+			if (this.lastLiquidId != this.tileEntity.getCurrentLiquidId()) {
+				crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquidId());
 			}
 			if (this.lastCharge != this.tileEntity.charge) {
 				crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
@@ -79,7 +79,7 @@ public class ContainerPetroleumGenerator extends Container {
 		}
 		
 		this.lastAmount = this.tileEntity.amount;
-		this.lastLiquidId = this.tileEntity.getCurrentLiquid();
+		this.lastLiquidId = this.tileEntity.getCurrentLiquidId();
 		this.lastCharge = this.tileEntity.charge;
 	}
 
@@ -139,6 +139,6 @@ public class ContainerPetroleumGenerator extends Container {
         }
 
         return stack;
-	}	
+	}
 
 }
