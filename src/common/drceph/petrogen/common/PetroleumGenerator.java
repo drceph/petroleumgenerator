@@ -52,9 +52,10 @@ public class PetroleumGenerator {
 	@Init
 	public void load(FMLInitializationEvent event) {
 		
-		petroleumGeneratorBlock = new BlockPetroleumGenerator(700,0).setBlockName("petroleumGeneratorBlock");
-		petroleumGeneratorBlock.setLightValue(0.8f);
-		petroleumGeneratorBlock.setHardness(1.5f);
+		petroleumGeneratorBlock = new BlockPetroleumGenerator(3143,0);
+		petroleumGeneratorBlock.setBlockName("petroleumGeneratorBlock");
+		petroleumGeneratorBlock.setHardness(2.0f);
+		petroleumGeneratorBlock.setStepSound(Block.soundMetalFootstep);
 		
 		GameRegistry.registerBlock(petroleumGeneratorBlock);
 		MinecraftForge.setBlockHarvestLevel(petroleumGeneratorBlock, "pickaxe", 0);
