@@ -7,6 +7,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ICrafting;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 
 public class ContainerPetroleumGenerator extends Container {
@@ -87,5 +88,38 @@ public class ContainerPetroleumGenerator extends Container {
 	}
 	
 	
+	
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
+		// TODO Auto-generated method stub
+		ItemStack stack = null;
+        Slot slotObject = (Slot) inventorySlots.get(slot);
+
+        //null checks and checks if the item can be stacked (maxStackSize > 1)
+        if (slotObject != null && slotObject.getHasStack()) {
+                ItemStack stackInSlot = slotObject.getStack();
+                stack = stackInSlot.copy();
+
+                //merges the item into player inventory since its in the tileEntity
+                //this assumes only 1 slot, for inventories with > 1 slots, check out the Chest Container.
+                if (slot == 0) {
+                        if (!mergeItemStack(stackInSlot, 1,
+                                        inventorySlots.size(), true)) {
+                                return null;
+                        }
+                //places it into the tileEntity is possible since its in the player inventory
+                } else if (!mergeItemStack(stackInSlot, 0, 1, false)) {
+                        return null;
+                }
+
+                if (stackInSlot.stackSize == 0) {
+                        slotObject.putStack(null);
+                } else {
+                        slotObject.onSlotChanged();
+                }
+        }
+
+        return stack;
+	}	
 
 }

@@ -31,6 +31,10 @@ public class FuelPetroleumGenerator {
 	public static FuelPetroleumGenerator getFuelByItemId(int itemId) {
 		return fuels.get(itemId);
 	}
+	
+	public static boolean isValidFuel(int itemId) {
+		return fuels.containsKey(itemId);
+	}
 
 	/* Instance */
 	
@@ -59,6 +63,9 @@ public class FuelPetroleumGenerator {
 		this.euPerBucket = euPerBucket;
 		this.euPacketSize = euPacketSize;
 		this.guiOffset = offset;
+		
+		PetroleumGenerator.log.info("Adding fuel "+fuel.asItemStack().getDisplayName() 
+									+" (ID: "+fuel.itemID+") => Potential: "+euPerBucket+", Power: "+euPacketSize);
 		FuelPetroleumGenerator.fuels.put(fuel.itemID, this);
 	}
 	

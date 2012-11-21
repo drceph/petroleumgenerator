@@ -35,11 +35,13 @@ public class GuiPetroleumGenerator extends GuiContainer {
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         
         //liquid
-        int scaled = tileEntity.getScaledVolume();
-        drawTexturedModalRect(x+50, y+14+tileEntity.SCALE-scaled, 192, 0, 16, scaled);
+        int fuelScaled = tileEntity.getScaledVolume();
+        drawTexturedModalRect(x+50, y+14+tileEntity.FUEL_GAUGE_SCALE-fuelScaled, 192, 0, 16, fuelScaled);
+        drawTexturedModalRect(x+50, y+14, 176, 0, 16, 58); //liquid_scale_marks
         
-        //liquid_scale_marks
-        drawTexturedModalRect(x+50, y+14, 176, 0, 16, 58);
+        //energy
+        int energyScaled = 0;
+        
 	}
 
 }
