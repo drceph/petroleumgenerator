@@ -51,20 +51,18 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	public static final int FUEL_GAUGE_SCALE = 58;
 	public static final int ENERGY_GAUGE_SCALE = 24;
 	public int amount;
-	public int liquidId;
-	public int liquidMeta;
 	public int charge;
 	private int buffer;
+	private FuelPetroleumGenerator fuel;
 	public static final int[] fuelIds = {LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)).itemID,};
 	
 
 	public TileEntityPetroleumGenerator() {
 		this.inventory = new ItemStack[SLOT_COUNT];
-		liquidId = 0;
-		liquidMeta = 0;
 		amount = 0;
 		charge = 0;
 		buffer = 0;
+		fuel = null;
 	}
 	
 	/**
@@ -72,8 +70,10 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	 * @return LiquidStack representing the tank contents, null if empty tank.
 	 */
 	public LiquidStack getLiquidStack() {
-		if (liquidId != 0) {
-			return new LiquidStack(liquidId,amount,liquidMeta);
+		if (fuel != null) {
+			LiquidStack newStack = fuel.getFuel().copy();
+			newStack.amount = amount;
+			return newStack;
 		} else {
 			return null;
 		}
@@ -98,12 +98,31 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 			
 			//STEP 1: Try to fill tank
 			if (amount <= MAX_VOLUME - LiquidContainerRegistry.BUCKET_VOLUME) {
-				fillTankFromInventory(this.inventory[0]);
+				changed = fillTankFromInventory(this.inventory[0]);
 			}
+			
+			//STEP 3: Try to emit power (from charge)
+			
+			if (charge > 0) {
+				
+			}
+			
 			
 			//STEP 2: Try to charge battery
 			
-			//STEP 3: Try to emit power (from charge)
+			//burn fuel to fill buffer
+			if (buffer == 0 && amount > 0) {
+				
+			}
+			
+			//use buffer
+			if (buffer > 0) {
+				
+			}
+			
+			
+			
+			
 		
 			//STEP 4: cleanup
 			
@@ -116,19 +135,36 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	}
 	
 
-	private void fillTankFromInventory(ItemStack itemStack) {
+	private boolean fillTankFromInventory(ItemStack itemStack) {
 	
-		LiquidStack liquid = LiquidContainerRegistry.getLiquidForFilledItem(itemStack);
-		if (liquid == null) return;
+		boolean changed = false;
 		
-		if (this.liquidId == 0 && FuelPetroleumGenerator.isValidFuel(liquid.itemID)) {
-			this.liquidId = liquid.itemID;
-			this.liquidMeta = liquid.itemMeta;
+		LiquidStack liquid = LiquidContainerRegistry.getLiquidForFilledItem(itemStack);
+		if (liquid == null) return changed;
+		
+		if (this.fuel == null && FuelPetroleumGenerator.isValidFuel(liquid.itemID)) {
+			setCurrentLiquid(liquid.itemID);
+			
 		}
 		
 		if (isCurrentFuel(liquid)) {
 			this.fill(0,liquid,true);
 			this.inventory[0] = itemStack.getItem().getContainerItemStack(null);
+			changed = true;
+		}
+		
+		return changed;
+	}
+	
+	public void setCurrentLiquid(int id) {
+		this.fuel = FuelPetroleumGenerator.getFuelByItemId(id);
+	}
+	
+	public int getCurrentLiquid() {
+		if (fuel != null) {
+			return fuel.getItemId();
+		} else {
+			return 0;
 		}
 	}
 
@@ -246,8 +282,8 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
 			}
 		}
-		liquidId = tagCompound.getInteger("liquidId");
-		liquidMeta = tagCompound.getInteger("liquidMeta");
+		int liquidId = tagCompound.getInteger("liquidId");
+		setCurrentLiquid(liquidId);
 		amount = tagCompound.getInteger("amount");
 		charge = tagCompound.getInteger("charge");
 	}
@@ -271,8 +307,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		}
 
 		tagCompound.setTag("Inventory", itemList);
-		tagCompound.setInteger("liquidId", liquidId);
-		tagCompound.setInteger("liquidMeta", liquidMeta);
+		tagCompound.setInteger("liquidId", fuel.getItemId());
 		tagCompound.setInteger("amount", amount);
 		tagCompound.setInteger("charge",charge);
 	}
@@ -315,9 +350,8 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	@Override
 	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
 		//System.err.println("Current: "+liquidId+":"+liquidMeta+" Input: "+resource.itemID+":"+resource.itemMeta);
-		if (liquidId == 0 && FuelPetroleumGenerator.isValidFuel(resource.itemID)) {
-			liquidId = resource.itemID;
-			liquidMeta = resource.itemMeta;
+		if (fuel == null && FuelPetroleumGenerator.isValidFuel(resource.itemID)) {
+			setCurrentLiquid(resource.itemID);
 		}
 		
 		if (!isCurrentFuel(resource)) {
@@ -341,11 +375,9 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	}
 	
 	private boolean isCurrentFuel(LiquidStack resource) {
-		if (liquidId != resource.itemID) {
+		if (fuel == null || fuel.getItemId() != resource.itemID) {
 			return false;
-		} else if (liquidId == resource.itemID && liquidMeta != resource.itemMeta) {
-			return false;
-		}
+		} 
 		return true;
 	}
 

@@ -57,9 +57,8 @@ public class ContainerPetroleumGenerator extends Container {
 		super.addCraftingToCrafters(crafter);
 		
 		crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
-		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.liquidId);
-		crafter.sendProgressBarUpdate(this, 2, this.tileEntity.liquidMeta);
-		crafter.sendProgressBarUpdate(this, 3, this.tileEntity.charge);
+		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquid());
+		crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
 	}
 
 	@Override
@@ -71,20 +70,16 @@ public class ContainerPetroleumGenerator extends Container {
 			if (this.lastAmount != this.tileEntity.amount) {
 				crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
 			}
-			if (this.lastLiquidId != this.tileEntity.liquidId) {
-				crafter.sendProgressBarUpdate(this, 1, this.tileEntity.liquidId);
-			}
-			if (this.lastLiquidMeta != this.tileEntity.liquidMeta) {
-				crafter.sendProgressBarUpdate(this, 2, this.tileEntity.liquidMeta);
+			if (this.lastLiquidId != this.tileEntity.getCurrentLiquid()) {
+				crafter.sendProgressBarUpdate(this, 1, this.tileEntity.getCurrentLiquid());
 			}
 			if (this.lastCharge != this.tileEntity.charge) {
-				crafter.sendProgressBarUpdate(this, 3, this.tileEntity.charge);
+				crafter.sendProgressBarUpdate(this, 2, this.tileEntity.charge);
 			}
 		}
 		
 		this.lastAmount = this.tileEntity.amount;
-		this.lastLiquidId = this.tileEntity.liquidId;
-		this.lastLiquidMeta = this.tileEntity.liquidMeta;
+		this.lastLiquidId = this.tileEntity.getCurrentLiquid();
 		this.lastCharge = this.tileEntity.charge;
 	}
 
@@ -104,12 +99,9 @@ public class ContainerPetroleumGenerator extends Container {
 			this.tileEntity.amount = par2;
 		}
 		if (par1 == 1) {
-			this.tileEntity.liquidId = par2;
+			this.tileEntity.setCurrentLiquid(par2);
 		}
 		if (par1 == 2) {
-			this.tileEntity.liquidMeta = par2;
-		}
-		if (par1 == 3) {
 			this.tileEntity.charge = par2;
 		}
 	}

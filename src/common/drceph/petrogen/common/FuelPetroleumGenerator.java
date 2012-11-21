@@ -76,6 +76,10 @@ public class FuelPetroleumGenerator {
 		return fuel;
 	}
 
+	public int getItemId() {
+		return fuel.itemID;
+	}
+	
 	/**
 	 * @return the amount of EU one bucket of this fuel will generate
 	 */

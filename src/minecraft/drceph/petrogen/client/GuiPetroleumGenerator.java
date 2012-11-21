@@ -22,7 +22,7 @@ public class GuiPetroleumGenerator extends GuiContainer {
         fontRenderer.drawString("Petroleum Generator", 8, 4, 0x404040);
         //System.out.println(container==null?"null":container.toString());
         //todo: makes a new container object each click, need to get the info from the tileentity??
-        fontRenderer.drawString("V:" +tileEntity.amount, 8, (ySize - 96) + 2, 0x404040);
+        fontRenderer.drawString("V:" +tileEntity.charge, 8, (ySize - 96) + 2, 0x404040);
         
 	}
 	@Override
@@ -36,8 +36,8 @@ public class GuiPetroleumGenerator extends GuiContainer {
         
         //liquid
         int fuelScaled = tileEntity.getScaledVolume();
-        if (FuelPetroleumGenerator.isValidFuel(tileEntity.liquidId)) {
-        	int fuelOffset = FuelPetroleumGenerator.getFuelByItemId(tileEntity.liquidId).getGuiOffset();
+        if (FuelPetroleumGenerator.isValidFuel(tileEntity.getCurrentLiquid())) {
+        	int fuelOffset = FuelPetroleumGenerator.getFuelByItemId(tileEntity.getCurrentLiquid()).getGuiOffset();
         	drawTexturedModalRect(x+50, y+14+tileEntity.FUEL_GAUGE_SCALE-fuelScaled, 192+(16*fuelOffset), 0, 16, fuelScaled);
             drawTexturedModalRect(x+50, y+14, 176, 0, 16, 58); //liquid_scale_marks
         }
