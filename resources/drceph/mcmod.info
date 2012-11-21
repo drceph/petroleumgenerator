@@ -1,0 +1,21 @@
+{
+  "modinfoversion": 2,
+  "modlist": [{
+    "modid": "drceph.petrogen",
+    "name": "Petroleum Generator",
+    "description": "A buildcraft <> IC2 crossover mod. Tasty on its own; Delicious served with a main course of Forestry. Adds a Petroleum Generator that produces EU directly from Buildcraft Fuel/Oil with similar stats to the Forestry Bio Generator.",
+    "version": "0.1",
+    "mcversion": "1.4.5",
+    "url": "https://github.com/chrisduran/petroleumgenerator",
+    "updateUrl": "",
+    "authors": [ "DrCeph" ],
+    "credits": "Authored by DrCeph, based heavily on SirSengir's Forestry BioGenerator.",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": [ "Forge", "mod_BuildCraftCore", "IC2" ],
+    "dependencies": [ "mod_BuildCraftCore", "IC2" ],
+    "dependants": [],
+    "useDependencyInformation": "true"
+  }]
+}
