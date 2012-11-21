@@ -43,7 +43,7 @@ public class PetroleumGenerator {
 		
 		GameRegistry.registerBlock(petroleumGeneratorBlock);
 		MinecraftForge.setBlockHarvestLevel(petroleumGeneratorBlock, "pickaxe", 0);
-		LanguageRegistry.addName(petroleumGeneratorBlock, "Magic Generator Block");
+		LanguageRegistry.addName(petroleumGeneratorBlock, "Petroleum Generator");
 		
 		GameRegistry.registerTileEntity(TileEntityPetroleumGenerator.class, "TileEntityPetroleumGenerator");
 		
