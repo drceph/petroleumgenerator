@@ -11,7 +11,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderThings() {
-		// TODO Auto-generated method stub
 		MinecraftForgeClient.preloadTexture("/drceph/petrogen/sprites/blocks.png");
 	}
 	

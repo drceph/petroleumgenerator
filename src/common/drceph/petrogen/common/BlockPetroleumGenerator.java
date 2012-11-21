@@ -36,9 +36,7 @@ public class BlockPetroleumGenerator extends BlockContainer {
 		// Just making an instance of the TileEntity that the player clicked on
 		TileEntity tile_entity = world.getBlockTileEntity(x, y, z);
 
-		// Checking if the TileEntity is nothing or if the player is sneaking
 		if (tile_entity == null || player.isSneaking()) {
-			// Returns false so it doesn't update anything
 			return false;
 		}
 
@@ -49,26 +47,21 @@ public class BlockPetroleumGenerator extends BlockContainer {
 		if (tile_entity instanceof TileEntityPetroleumGenerator) {
 
 			TileEntityPetroleumGenerator cast_tile_entity = (TileEntityPetroleumGenerator) tile_entity;
-
-			System.out.println(cast_tile_entity.amount);
 			player.openGui(PetroleumGenerator.instance, 0, world, x, y, z);
 
 		}
-		// Returns true to force an update
 		return true;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
 		TileEntity te = new TileEntityPetroleumGenerator();
-		System.err.println(te.xCoord + "x" + te.yCoord + "x" + te.zCoord);
+		//System.err.println(te.xCoord + "x" + te.yCoord + "x" + te.zCoord);
 		return te;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata) {
-		// TODO Auto-generated method stub
 		return this.createNewTileEntity(world);
 	}
 

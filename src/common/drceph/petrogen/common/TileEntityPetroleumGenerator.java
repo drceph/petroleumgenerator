@@ -112,7 +112,6 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				if (buffer <= 0 && charge < MAX_CHARGE-fuel.getEuPacketSize()) {
 					amount--;
 					buffer = fuel.getEuPerLiquidUnit();
-					didBurn = true;
 				}
 			}
 			
@@ -120,6 +119,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				buffer -= currentEu;
 				charge += currentEu;
 				charge = Math.min(charge, MAX_CHARGE);
+				didBurn = true;
 				//changed = true;
 			}
 			
