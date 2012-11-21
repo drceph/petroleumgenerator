@@ -36,8 +36,11 @@ public class GuiPetroleumGenerator extends GuiContainer {
         
         //liquid
         int fuelScaled = tileEntity.getScaledVolume();
-        drawTexturedModalRect(x+50, y+14+tileEntity.FUEL_GAUGE_SCALE-fuelScaled, 192, 0, 16, fuelScaled);
-        drawTexturedModalRect(x+50, y+14, 176, 0, 16, 58); //liquid_scale_marks
+        if (FuelPetroleumGenerator.isValidFuel(tileEntity.liquidId)) {
+        	int fuelOffset = FuelPetroleumGenerator.getFuelByItemId(tileEntity.liquidId).getGuiOffset();
+        	drawTexturedModalRect(x+50, y+14+tileEntity.FUEL_GAUGE_SCALE-fuelScaled, 192+(16*fuelOffset), 0, 16, fuelScaled);
+            drawTexturedModalRect(x+50, y+14, 176, 0, 16, 58); //liquid_scale_marks
+        }
         
         //energy
         int energyScaled = 0;

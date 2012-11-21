@@ -15,6 +15,9 @@ public class ContainerPetroleumGenerator extends Container {
 	public TileEntityPetroleumGenerator tileEntity;
 	private EntityPlayer invokingPlayer;
 	private int lastAmount = 0;
+	private int lastLiquidId = 0;
+	private int lastLiquidMeta = 0;
+	private int lastCharge = 0;
 	
 	public ContainerPetroleumGenerator(IInventory playerInventory, TileEntityPetroleumGenerator tileEntity) {
 		this.tileEntity = tileEntity;
@@ -49,11 +52,14 @@ public class ContainerPetroleumGenerator extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting par1iCrafting) {
+	public void addCraftingToCrafters(ICrafting crafter) {
 		// TODO Auto-generated method stub
-		super.addCraftingToCrafters(par1iCrafting);
+		super.addCraftingToCrafters(crafter);
 		
-		par1iCrafting.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
+		crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
+		crafter.sendProgressBarUpdate(this, 1, this.tileEntity.liquidId);
+		crafter.sendProgressBarUpdate(this, 2, this.tileEntity.liquidMeta);
+		crafter.sendProgressBarUpdate(this, 3, this.tileEntity.charge);
 	}
 
 	@Override
@@ -65,9 +71,21 @@ public class ContainerPetroleumGenerator extends Container {
 			if (this.lastAmount != this.tileEntity.amount) {
 				crafter.sendProgressBarUpdate(this, 0, this.tileEntity.amount);
 			}
+			if (this.lastLiquidId != this.tileEntity.liquidId) {
+				crafter.sendProgressBarUpdate(this, 1, this.tileEntity.liquidId);
+			}
+			if (this.lastLiquidMeta != this.tileEntity.liquidMeta) {
+				crafter.sendProgressBarUpdate(this, 2, this.tileEntity.liquidMeta);
+			}
+			if (this.lastCharge != this.tileEntity.charge) {
+				crafter.sendProgressBarUpdate(this, 3, this.tileEntity.charge);
+			}
 		}
 		
 		this.lastAmount = this.tileEntity.amount;
+		this.lastLiquidId = this.tileEntity.liquidId;
+		this.lastLiquidMeta = this.tileEntity.liquidMeta;
+		this.lastCharge = this.tileEntity.charge;
 	}
 
 	@Override
@@ -84,6 +102,15 @@ public class ContainerPetroleumGenerator extends Container {
 		
 		if (par1 == 0) {
 			this.tileEntity.amount = par2;
+		}
+		if (par1 == 1) {
+			this.tileEntity.liquidId = par2;
+		}
+		if (par1 == 2) {
+			this.tileEntity.liquidMeta = par2;
+		}
+		if (par1 == 3) {
+			this.tileEntity.charge = par2;
 		}
 	}
 	
