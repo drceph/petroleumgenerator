@@ -64,7 +64,7 @@ public class FuelPetroleumGenerator {
 		this.euPacketSize = euPacketSize;
 		this.guiOffset = offset;
 		
-		PetroleumGenerator.log.info("Adding fuel "+fuel.asItemStack().getDisplayName() 
+		PetroleumGenerator.log.info("Adding fuel "+fuel.asItemStack().getItemName() 
 									+" (ID: "+fuel.itemID+") => Potential: "+euPerBucket+", Power: "+euPacketSize);
 		FuelPetroleumGenerator.fuels.put(fuel.itemID, this);
 	}
