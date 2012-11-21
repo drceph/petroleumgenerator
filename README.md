@@ -37,3 +37,8 @@ By comparison, the Biogenerator currently produces (as of Forestry 1.6):
 Note 1: This is a power ratio of 4:1 between Biofuel to Biomass.  
 Note 2: This keeps the 80% efficiency of biomass/biofuel to oil/fuel, when normalised for the power ratio.  
 
+Tips and Tricks
+---------------
+
+**Tip 1: Don't run your refinery using an electric engine powered by petroleum generator.**  
+Everytime you convert you will lose power. Try producing enough fuel with an oil-fired combustion engine to allow you to run a fuel-combustion engine to refine your oil. You will produce fuel far faster than you use it in this way, leaving more than enough spare to produce EU.
