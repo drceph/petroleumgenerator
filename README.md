@@ -55,6 +55,15 @@ D = Combustion Engine
 In picture form:  
 ![xAx xBx CDC](https://raw.github.com/chrisduran/petroleumgenerator/5eb0aa755571616cefb5d49f271a6a7a0865d304/art/screenshots/crafting.png)
 
+TODO
+----
+
+This isn't a completed product. Although the base functionality is there, DrCeph Industries always has more modules to pack in. A list of what is next in line:
+
+* The current texture is dire at best, learn to texture/model and/or blackmail somebody else to do it.
+* Add support for Forestry capsules and cells. Currently takes fuel/oil from liquid pipes and buckets only. 
+* The elements on the GUI could use an improvement in spacing.
+
 Requirements
 ------------
 
