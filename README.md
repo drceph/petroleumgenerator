@@ -40,7 +40,12 @@ Note 2: This keeps the 80% efficiency of biomass/biofuel to oil/fuel, when norma
 Requirements
 ------------
 
-Requires Industrial Craft v1.109 or greater and Buildcraft 3.2.0 or greater. It also requires the recommended Forge version for those addons.
+Requires IndustrialCraft2 v1.109 or greater and BuildCraft 3.2.0 or greater. It also requires the recommended Forge version for those addons.
+
+Installation
+------------
+
+Follow the installation instructions for Forge, IndustrialCraft2 and BuildCraft. Once these are installed successfully, place the PetroGen mod file in the same 'mods' directory. Shake then stir.
 
 License
 -------
