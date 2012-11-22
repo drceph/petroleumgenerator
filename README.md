@@ -42,3 +42,14 @@ Tips and Tricks
 
 **Tip 1: Don't run your refinery using an electric engine powered by petroleum generator.**  
 Everytime you convert you will lose power. Try producing enough fuel with an oil-fired combustion engine to allow you to run a fuel-combustion engine to refine your oil. You will produce fuel far faster than you use it in this way, leaving more than enough spare to produce EU.
+
+License
+-------
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+https://github.com/chrisduran/petroleumgenerator/blob/master/LICENCE
