@@ -37,6 +37,24 @@ By comparison, the Biogenerator currently produces (as of Forestry 1.6):
 Note 1: This is a power ratio of 4:1 between Biofuel to Biomass.  
 Note 2: This keeps the 80% efficiency of biomass/biofuel to oil/fuel, when normalised for the power ratio.  
 
+Crafting Recipe
+---------------
+The crafting recipe is as follows:
+
+x A x  
+x B x  
+C D C  
+  
+Where:  
+x = blank spot  
+A = Electronic Circuit  
+B = Generator  
+C = Water Cell  
+D = Combustion Engine  
+
+In picture form:  
+![xAx xBx CDC](https://raw.github.com/chrisduran/petroleumgenerator/5eb0aa755571616cefb5d49f271a6a7a0865d304/art/screenshots/crafting.png)
+
 Requirements
 ------------
 
@@ -50,10 +68,10 @@ Follow the installation instructions for Forge, IndustrialCraft2 and BuildCraft.
 License
 -------
 
+https://github.com/chrisduran/petroleumgenerator/blob/master/LICENCE
+
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-https://github.com/chrisduran/petroleumgenerator/blob/master/LICENCE
