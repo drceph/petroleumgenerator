@@ -4,7 +4,7 @@ Petroleum Generator
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
 
-This mod adds a Petroleum Generator to the game. This generator will produce EU directly from Buildcraft Fuel/Oil, which can be either pumped in as a buildcraft liquid pipes, or manually deposited using containers. Want to burn some Biofuel in this? Touch. DrCeph Industries doesn't believe in the green revolution. It is just a fad that will pass, like hypercolor and scrunchies.
+This mod adds a Petroleum Generator to the game. This generator will produce EU directly from Buildcraft Fuel/Oil, which can be either pumped in as a buildcraft liquid pipes, or manually deposited using containers. Want to burn some Biofuel in this? Tough. DrCeph Industries doesn't believe in the green revolution. It is just a fad that will pass, like hypercolor and scrunchies.
 
 Why another BC/IC conversion mod?
 ---------------------------------
