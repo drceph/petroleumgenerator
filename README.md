@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.4
+version 0.5
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -69,7 +69,7 @@ This isn't a completed product. Although the base functionality is there, DrCeph
 
 * The current texture is dire at best, learn to texture/model and/or blackmail somebody else to do it.
 * Make engine enable/disable on redstone power.
-* Add support for Forestry capsules and cells. Currently takes fuel/oil from liquid pipes and buckets only. 
+* ~~Add support for Forestry capsules and cells. Currently takes fuel/oil from liquid pipes and buckets only.~~
 * Make blockID and fuel-to-EU ratio configurable.
 * The elements on the GUI could use an improvement in spacing.
 
@@ -93,6 +93,15 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Changelog
+---------
+
+0.5:
+* Added support for stackable containers of fuel and oil, notably Forestry capsules and cans
+
+0.4:
+* Initial release
 
 Resources
 ---------
