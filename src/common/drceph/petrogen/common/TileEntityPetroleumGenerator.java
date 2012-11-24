@@ -195,7 +195,11 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		
 		if (isCurrentFuel(liquid)) {
 			this.fill(0,liquid,true);
-			this.inventory[0] = itemStack.getItem().getContainerItemStack(null);
+			if (LiquidContainerRegistry.isBucket(itemStack)) {
+				this.inventory[0] = itemStack.getItem().getContainerItemStack(null);
+			} else {
+				decrStackSize(0, 1);
+			}
 			changed = true;
 		}
 		
