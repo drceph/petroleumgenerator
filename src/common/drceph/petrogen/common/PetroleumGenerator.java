@@ -62,12 +62,14 @@ public class PetroleumGenerator {
 	
 	public static Logger log = Logger.getLogger("PetroGen");
 	
-	//TODO add to configuration file
-	public static int fuelEnergy = 100000; //EU output per bucket
-	public static int oilEnergy = 10000; //EU output per bucket
 	public static int fuelOutput = 20; //EU per tick
 	public static int oilOutput = 10; //EU per tick
+	private int fuelStep = 20000;
+	private int oilStep = 10000;
 	
+	//configuration file fields
+	private int fuelMultiplier;
+	private int oilMultiplier;
 	private int petroleumGeneratorBlockId;
 	
 	public static Block petroleumGeneratorBlock;
@@ -82,6 +84,13 @@ public class PetroleumGenerator {
         
 		config.load();
         petroleumGeneratorBlockId = config.getBlock("block","blockPetroleumGenerator",3143).getInt();
+     
+        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Oil is multiplied by 10,000 for the total EU/bucket (Default: 10,000 x 1 : 10,000 EU) \nFuel is multiplied by 20,000 for the total EU/bucket (Default: 20,000 x 5 : 100,000 EU)");
+        oilMultiplier = config.get(Configuration.CATEGORY_GENERAL, "oil_multiplier", 1).getInt();
+        oilMultiplier = Math.max(oilMultiplier, 1);
+        fuelMultiplier = config.get(Configuration.CATEGORY_GENERAL, "fuel_multiplier", 5).getInt();
+        fuelMultiplier = Math.max(fuelMultiplier, 1);
+        
         config.save();
 		
 	}
@@ -107,8 +116,8 @@ public class PetroleumGenerator {
 		
 		GameRegistry.registerTileEntity(TileEntityPetroleumGenerator.class, "TileEntityPetroleumGenerator");
 		
-		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)),oilEnergy,oilOutput,0);
-		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketFuel)),fuelEnergy,fuelOutput,1);
+		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)),oilStep*oilMultiplier,oilOutput,0);
+		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketFuel)),fuelStep*fuelMultiplier,fuelOutput,1);
 		
 		//log.info(FuelPetroleumGenerator.getFuelByItemId(4064).getEuPerLiquidUnit()+" in this many ticks: "+FuelPetroleumGenerator.getFuelByItemId(4064).getTicksForLiquidUnit());
 				
