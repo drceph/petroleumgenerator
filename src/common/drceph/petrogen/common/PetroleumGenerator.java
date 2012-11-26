@@ -68,17 +68,28 @@ public class PetroleumGenerator {
 	public static int fuelOutput = 20; //EU per tick
 	public static int oilOutput = 10; //EU per tick
 	
+	private int petroleumGeneratorBlockId;
+	
 	public static Block petroleumGeneratorBlock;
 	
 	@PreInit
 	public void load(FMLPreInitializationEvent event) {
+		
 		log.setParent(FMLLog.getLogger());
+		
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		// loading the configuration from its file
+        
+		config.load();
+        petroleumGeneratorBlockId = config.getBlock("block","blockPetroleumGenerator",3143).getInt();
+        config.save();
+		
 	}
 	
 	@Init
 	public void load(FMLInitializationEvent event) {
 		
-		petroleumGeneratorBlock = new BlockPetroleumGenerator(3143,0);
+		petroleumGeneratorBlock = new BlockPetroleumGenerator(petroleumGeneratorBlockId,0);
 		petroleumGeneratorBlock.setBlockName("petroleumGeneratorBlock");
 		petroleumGeneratorBlock.setHardness(2.0f);
 		petroleumGeneratorBlock.setStepSound(Block.soundMetalFootstep);
