@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.5
+version 0.7
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -67,11 +67,11 @@ TODO
 
 This isn't a completed product. Although the base functionality is there, DrCeph Industries always has more modules to pack in. A list of what is next in line:
 
-* The current texture is dire at best, learn to texture/model and/or blackmail somebody else to do it.
 * Make engine enable/disable on redstone power.
-* ~~Add support for Forestry capsules and cells. Currently takes fuel/oil from liquid pipes and buckets only.~~
-* Make blockID and fuel-to-EU ratio configurable.
 * The elements on the GUI could use an improvement in spacing.
+* ~~Add support for Forestry capsules and cells. Currently takes fuel/oil from liquid pipes and buckets only.~~
+* ~~Make blockID and fuel-to-EU ratio configurable.~~
+* ~~The current texture is dire at best, learn to texture/model and/or blackmail somebody else to do it.~~
 
 Requirements
 ------------
@@ -82,6 +82,8 @@ Installation
 ------------
 
 Follow the installation instructions for Forge, IndustrialCraft2 and BuildCraft. Once these are installed successfully, place the PetroGen mod file in the same 'mods' directory. Shake then stir.
+
+If you prefer @mjramonru's texture, replace the blocks.png file in drceph/petrogen/sprites with the blocksAlt.png file (i.e. rename blocksAlt.png to blocks.png). **Yell at me if you want it to be the default texture. It is a pretty cool texture, check it out.** 
 
 License
 -------
@@ -94,14 +96,25 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+@mjramonru retains all rights and ownership of his texture file, blocksAlt.png - I am simply hosting the file in the modpack for the convenience of end users.
+
 Changelog
 ---------
 
+0.7:
+* Added configurable options. Fuel/oil now configurable in steps of 20k/10k EU respectively. Block ID also configurable (default is 3143).
+* Added alternative texture, graciously created by @mjramonru. 
+
 0.5:
-* Added support for stackable containers of fuel and oil, notably Forestry capsules and cans
+* Added support for stackable containers of fuel and oil, notably Forestry capsules and cans.
 
 0.4:
-* Initial release
+* Initial release.
+
+Credits
+-------
+
+@mjramonru for the awesome texture.
 
 Resources
 ---------
