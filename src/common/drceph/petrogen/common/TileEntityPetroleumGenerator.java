@@ -68,22 +68,26 @@ import net.minecraftforge.liquids.LiquidDictionary.LiquidRegisterEvent;
  */
 public class TileEntityPetroleumGenerator extends TileEntity implements 
 			IInventory, ITankContainer, IEnergySource {
-
-	private ItemStack[] inventory;
-	public static final int SLOT_COUNT = 1;
-	private boolean initialised;
+	
+	//CONSTANTS
 	public static final int MAX_VOLUME = LiquidContainerRegistry.BUCKET_VOLUME * 10;
 	public static final int MAX_CHARGE = 30000;
 	public static final int FUEL_GAUGE_SCALE = 58;
 	public static final int ENERGY_GAUGE_SCALE = 24;
+	public static final int SLOT_COUNT = 1;
+	
+	//Proxied
 	public int amount;
 	public int charge;
-	private int buffer;
 	public int active;
-	private FuelPetroleumGenerator fuel;
 	public int currentEu;
-	public static final int[] fuelIds = {LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)).itemID,};
-	
+
+	//Variables
+	private ItemStack[] inventory;
+	private boolean initialised;
+	private FuelPetroleumGenerator fuel;
+	private int buffer;
+	private boolean hasRedstonePower; //Does NO work on redstone power (IC2 paradigm)
 
 	public TileEntityPetroleumGenerator() {
 		this.inventory = new ItemStack[SLOT_COUNT];
@@ -92,6 +96,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		buffer = 0;
 		currentEu = 0;
 		fuel = null;
+		hasRedstonePower = false;
 	}
 	
 	/**
@@ -119,6 +124,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 		if (!initialised && worldObj != null) {
 			if (!worldObj.isRemote) {
 				EnergyNet.getForWorld(worldObj).addTileEntity(this);
+				updateRedstoneStatus();
 			}
 			initialised = true;
 			changed = true;
@@ -132,7 +138,7 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 			if (amount <= MAX_VOLUME - LiquidContainerRegistry.BUCKET_VOLUME) {
 				changed = fillTankFromInventory(this.inventory[0]);
 			}
-			
+				
 			//STEP 2: Try to charge battery
 			if (amount > 0) {
 				if (buffer <= 0 && charge < MAX_CHARGE-fuel.getEuPacketSize()) {
@@ -149,9 +155,8 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 				//changed = true;
 			}
 			
-			//STEP 3: Try to emit power (from charge)
-			
-			if (charge >= currentEu) {
+			//STEP 3: Try to emit power (from charge; unless redstoned)
+			if (!hasRedstonePower && charge >= currentEu) {
 				int unused = EnergyNet.getForWorld(worldObj).emitEnergyFrom(this,currentEu);
 				didExpel = currentEu != unused;
 				charge -= (currentEu-unused);
@@ -465,6 +470,10 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 	@Override
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
 		return null;
+	}
+	
+	public void updateRedstoneStatus() {
+		hasRedstonePower = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
 	}
 	
 	
