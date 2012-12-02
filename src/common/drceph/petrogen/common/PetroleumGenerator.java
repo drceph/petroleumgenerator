@@ -109,13 +109,12 @@ public class PetroleumGenerator {
 		GameRegistry.registerBlock(petroleumGeneratorBlock);
 		MinecraftForge.setBlockHarvestLevel(petroleumGeneratorBlock, "pickaxe", 0);
 		LanguageRegistry.addName(petroleumGeneratorBlock, "Petroleum Generator");
-		ItemStack aStack = ic2.api.Items.getItem("electronicCircuit");
 		ItemStack bStack = ic2.api.Items.getItem("generator");
 		ItemStack cStack = new ItemStack(BuildCraftEnergy.engineBlock, 1, 2);
 		ItemStack dStack = ic2.api.Items.getItem("waterCell");
 		
-		GameRegistry.addRecipe(new ItemStack(petroleumGeneratorBlock)," a "," b ","dcd",
-				'a',aStack,'b',bStack,'c',cStack,'d',dStack);
+		GameRegistry.addRecipe(new ItemStack(petroleumGeneratorBlock),"   "," b ","dcd",
+				'b',bStack,'c',cStack,'d',dStack);
 		
 		GameRegistry.registerTileEntity(TileEntityPetroleumGenerator.class, "TileEntityPetroleumGenerator");
 		
