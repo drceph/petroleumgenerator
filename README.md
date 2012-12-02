@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.7
+version 0.10
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -24,43 +24,41 @@ How much EU will I get for oil and fuel?
 
 I've modelled this generator on the EU conversion rates on the Bio Generator in the Forestry mod. 
 
-A bucket of oil will produce 10,000 EU at 10EU/t  
-A bucket of fuel will produce 100,000 EU at 20EU/t  
+A bucket of oil will produce 30,000 EU at 10EU/t  
+A bucket of fuel will produce 200,000 EU at 20EU/t  
 
-Note 1: These values were derived by looking at the MJ output of oil compared to biomass, and of fuel compared to biofuel.   
+Note 1: These values were derived by looking at the MJ output of oil compared to biomass, and of fuel compared to biofuel. Then a small boost due to oil being a non-renewable energy source.
 Note 2: They have been tweaked slightly to make everything work nicely in integer space.  
-Note 3: Notice that the power ratio between fuel and oil is 10:1, conserving the BC power differential.  
+Note 3: Notice that the power ratio between fuel and oil is 10:1, conserving the BC power differential (currently slightly better until I get around to an EU refinery mod!)  
 
 By comparison, the Biogenerator currently produces (as of Forestry 1.6):  
 
 8,000 EU @ 8EU/t for Biomass  
 32,000 EU @ 16EU/t for Biofuel  
 
-Note 1: This is a power ratio of 4:1 between Biofuel to Biomass.  
-Note 2: This keeps the 80% efficiency of biomass/biofuel to oil/fuel, when normalised for the power ratio.  
+Note: This is a power ratio of 4:1 between Biofuel to Biomass. 
 
 Crafting Recipe
 ---------------
 The crafting recipe is as follows:
 
+x x x  
 x A x  
-x B x  
-C D C  
+B C B  
   
 Where:  
 x = blank spot  
-A = Electronic Circuit  
-B = Generator  
-C = Water Cell  
-D = Combustion Engine  
+A = Generator  
+B = Water Cell  
+C = Combustion Engine  
 
 In picture form:  
-![xAx xBx CDC](https://raw.github.com/chrisduran/petroleumgenerator/5eb0aa755571616cefb5d49f271a6a7a0865d304/art/screenshots/crafting.png)
+![xxx xAx BCB](https://raw.github.com/chrisduran/petroleumgenerator/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots/crafting.png)
 
 Screenshots
 -----------
 
-Screenshots can be found in the github repository: [https://github.com/chrisduran/petroleumgenerator/tree/39c152feb1df45180f090e79639c3bea9a325222/art/screenshots](https://github.com/chrisduran/petroleumgenerator/tree/39c152feb1df45180f090e79639c3bea9a325222/art/screenshots)
+Screenshots can be found in the github repository: [https://github.com/chrisduran/petroleumgenerator/tree/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots](https://github.com/chrisduran/petroleumgenerator/tree/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots)
 
 TODO
 ----
@@ -96,6 +94,13 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+0.10:
+* Updated default EU/bucket for oil and fuel to 30k and 200k respectively. Due to relative scarcity of resource compared to other sources.
+* Removed electronic circuit from recipe after some analysis of the relative costs of geothermal and biogenerators.
+* Powering the generator by redstone will block emitting of EU packets. Tank and buffer will still fill, however.
+* Updated alternative texture by @mjramonru.
+
 
 0.7:
 * Added configurable options. Fuel/oil now configurable in steps of 20k/10k EU respectively. Block ID also configurable (default is 3143).
