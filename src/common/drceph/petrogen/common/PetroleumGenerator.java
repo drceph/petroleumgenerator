@@ -62,10 +62,13 @@ public class PetroleumGenerator {
 	
 	public static Logger log = Logger.getLogger("PetroGen");
 	
-	public static int fuelOutput = 20; //EU per tick
-	public static int oilOutput = 10; //EU per tick
-	private int fuelStep = 20000;
-	private int oilStep = 10000;
+	//Fuel variables related to power and potential
+	public static int oilPower = 10; //EU per tick
+	public static int fuelPower = 20; //EU per tick
+	private int oilStep = 10000;   
+	private int fuelStep = 20000;  
+	private int defaultOilMultiplier = 3;   // Configurable. step*multiplier is 
+	private int defaultFuelMultiplier = 10; // EU output per bucket of fuel.
 	
 	//configuration file fields
 	private int fuelMultiplier;
@@ -85,10 +88,10 @@ public class PetroleumGenerator {
 		config.load();
         petroleumGeneratorBlockId = config.getBlock("block","blockPetroleumGenerator",3143).getInt();
      
-        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Oil is multiplied by 10,000 for the total EU/bucket (Default: 10,000 x 1 : 10,000 EU) \nFuel is multiplied by 20,000 for the total EU/bucket (Default: 20,000 x 5 : 100,000 EU)");
-        oilMultiplier = config.get(Configuration.CATEGORY_GENERAL, "oil_multiplier", 1).getInt();
+        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Oil is multiplied by 10,000 for the total EU/bucket (Default: 10,000 x 3 : 30,000 EU) \nFuel is multiplied by 20,000 for the total EU/bucket (Default: 20,000 x 10 : 200,000 EU)");
+        oilMultiplier = config.get(Configuration.CATEGORY_GENERAL, "oil_multiplier", defaultOilMultiplier).getInt();
         oilMultiplier = Math.max(oilMultiplier, 1);
-        fuelMultiplier = config.get(Configuration.CATEGORY_GENERAL, "fuel_multiplier", 5).getInt();
+        fuelMultiplier = config.get(Configuration.CATEGORY_GENERAL, "fuel_multiplier", defaultFuelMultiplier).getInt();
         fuelMultiplier = Math.max(fuelMultiplier, 1);
         
         config.save();
@@ -116,8 +119,8 @@ public class PetroleumGenerator {
 		
 		GameRegistry.registerTileEntity(TileEntityPetroleumGenerator.class, "TileEntityPetroleumGenerator");
 		
-		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)),oilStep*oilMultiplier,oilOutput,0);
-		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketFuel)),fuelStep*fuelMultiplier,fuelOutput,1);
+		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)),oilStep*oilMultiplier,oilPower,0);
+		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketFuel)),fuelStep*fuelMultiplier,fuelPower,1);
 		
 		//log.info(FuelPetroleumGenerator.getFuelByItemId(4064).getEuPerLiquidUnit()+" in this many ticks: "+FuelPetroleumGenerator.getFuelByItemId(4064).getTicksForLiquidUnit());
 				
