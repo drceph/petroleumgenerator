@@ -68,7 +68,7 @@ public class PetroleumGenerator {
 	private int oilStep = 10000;   
 	private int fuelStep = 20000;  
 	private int defaultOilMultiplier = 3;   // Configurable. step*multiplier is 
-	private int defaultFuelMultiplier = 10; // EU output per bucket of fuel.
+	private int defaultFuelMultiplier = 15; // EU output per bucket of fuel.
 	
 	//configuration file fields
 	private int fuelMultiplier;
