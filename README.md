@@ -25,18 +25,17 @@ How much EU will I get for oil and fuel?
 I've modelled this generator on the EU conversion rates on the Bio Generator in the Forestry mod. 
 
 A bucket of oil will produce 30,000 EU at 10EU/t  
-A bucket of fuel will produce 300,000 EU at 20EU/t  
+A bucket of fuel will produce 300,000 EU at 25EU/t  
 
 Note 1: These values were derived by looking at the MJ output of oil compared to biomass, and of fuel compared to biofuel. Then a boost due to oil being a non-renewable energy source.
 Note 2: They have been tweaked slightly to make everything work nicely in integer space.  
-Note 3: Notice that the power ratio between fuel and oil is 10:1, conserving the BC power differential (currently slightly better until I get around to an EU refinery mod!)  
+Note 3: Notice that the power ratio between fuel and oil is 10:1, conserving the BC power differential.
 
 By comparison, the Biogenerator currently produces (as of Forestry 1.6):  
 
 8,000 EU @ 8EU/t for Biomass  
 32,000 EU @ 16EU/t for Biofuel  
 
-Note: This is a power ratio of 4:1 between Biofuel to Biomass. 
 
 Crafting Recipe
 ---------------
