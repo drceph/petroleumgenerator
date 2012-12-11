@@ -48,7 +48,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "0.10")
+@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "0.12")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, clientPacketHandlerSpec = @SidedPacketHandler (channels = {"petrogen" }, packetHandler = drceph.petrogen.client.ClientPacketHandler.class),
 			serverPacketHandlerSpec =@SidedPacketHandler(channels = {"petrogen" }, packetHandler = drceph.petrogen.common.ServerPacketHandler.class))
 
@@ -88,7 +88,7 @@ public class PetroleumGenerator {
 		config.load();
         petroleumGeneratorBlockId = config.getBlock("block","blockPetroleumGenerator",3143).getInt();
      
-        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Oil is multiplied by 10,000 for the total EU/bucket (Default: 10,000 x 3 : 30,000 EU) \nFuel is multiplied by 20,000 for the total EU/bucket (Default: 20,000 x 10 : 200,000 EU)");
+        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Oil is multiplied by 10,000 for the total EU/bucket (Default: 10,000 x 3 : 30,000 EU) \nFuel is multiplied by 20,000 for the total EU/bucket (Default: 20,000 x 15 : 300,000 EU)");
         oilMultiplier = config.get(Configuration.CATEGORY_GENERAL, "oil_multiplier", defaultOilMultiplier).getInt();
         oilMultiplier = Math.max(oilMultiplier, 1);
         fuelMultiplier = config.get(Configuration.CATEGORY_GENERAL, "fuel_multiplier", defaultFuelMultiplier).getInt();

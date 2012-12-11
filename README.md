@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.10
+version 0.12
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -25,9 +25,9 @@ How much EU will I get for oil and fuel?
 I've modelled this generator on the EU conversion rates on the Bio Generator in the Forestry mod. 
 
 A bucket of oil will produce 30,000 EU at 10EU/t  
-A bucket of fuel will produce 200,000 EU at 20EU/t  
+A bucket of fuel will produce 300,000 EU at 20EU/t  
 
-Note 1: These values were derived by looking at the MJ output of oil compared to biomass, and of fuel compared to biofuel. Then a small boost due to oil being a non-renewable energy source.
+Note 1: These values were derived by looking at the MJ output of oil compared to biomass, and of fuel compared to biofuel. Then a boost due to oil being a non-renewable energy source.
 Note 2: They have been tweaked slightly to make everything work nicely in integer space.  
 Note 3: Notice that the power ratio between fuel and oil is 10:1, conserving the BC power differential (currently slightly better until I get around to an EU refinery mod!)  
 
@@ -94,6 +94,10 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+0.12:
+* Updated default EU/bucket for fuel (again) to 300k. This is after some discussions on the IC2 and FTB forums with people who are better at balance than I.
+* Block now updates texture on activity - you can now tell at a glance that you're burning precious fuel!
 
 0.10:
 * Updated default EU/bucket for oil and fuel to 30k and 200k respectively. Due to relative scarcity of resource compared to other sources.
