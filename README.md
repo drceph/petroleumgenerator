@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.12
+version 0.14
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -42,23 +42,24 @@ Crafting Recipe
 ---------------
 The crafting recipe is as follows:
 
-x x x  
 x A x  
-B C B  
+D B D  
+D C D  
   
 Where:  
 x = blank spot  
 A = Generator  
-B = Water Cell  
-C = Combustion Engine  
+B = Flint and Steel
+C = Piston
+D = Water Cell
 
 In picture form:  
-![xxx xAx BCB](https://raw.github.com/chrisduran/petroleumgenerator/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots/crafting.png)
+![xAx DBD DCD](https://raw.github.com/chrisduran/petroleumgenerator/6d5de2e67dcce4b41a191752f05ee6220276fa05/art/screenshots/crafting.png)
 
 Screenshots
 -----------
 
-Screenshots can be found in the github repository: [https://github.com/chrisduran/petroleumgenerator/tree/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots](https://github.com/chrisduran/petroleumgenerator/tree/3134ec25cc9cb82200f57d878e3000b43938ae55/art/screenshots)
+Screenshots can be found in the github repository: [https://github.com/chrisduran/petroleumgenerator/tree/6d5de2e67dcce4b41a191752f05ee6220276fa05/art/screenshots](https://github.com/chrisduran/petroleumgenerator/tree/6d5de2e67dcce4b41a191752f05ee6220276fa05/art/screenshots)
 
 TODO
 ----
@@ -95,9 +96,11 @@ You should have received a copy of the GNU General Public License along with thi
 Changelog
 ---------
 
-0.12:
+0.14:
 * Updated default EU/bucket for fuel (again) to 300k. This is after some discussions on the IC2 and FTB forums with people who are better at balance than I.
+* Also increased the output to 25 EU/t for fuel so that you don't need to shave after every bucket!
 * Block now updates texture on activity - you can now tell at a glance that you're burning precious fuel!
+* Also made the recipe in line with the costs of the Geothermal generator, and TE magma engines. Lava is fuel's closest 'competitor', so lessening the gap makes fuel less unattractive.
 
 0.10:
 * Updated default EU/bucket for oil and fuel to 30k and 200k respectively. Due to relative scarcity of resource compared to other sources.
