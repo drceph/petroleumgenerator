@@ -30,11 +30,15 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -49,6 +53,7 @@ public class BlockPetroleumGenerator extends BlockContainer {
 
 	public BlockPetroleumGenerator(int id, int texture) {
 		super(id, texture, Material.iron);
+		this.setRequiresSelfNotify();
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
@@ -90,6 +95,32 @@ public class BlockPetroleumGenerator extends BlockContainer {
 	public TileEntity createNewTileEntity(World world, int metadata) {
 		return this.createNewTileEntity(world);
 	}
+	
+	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
+		if (active) {
+			world.setBlockMetadataWithNotify(x, y, z, 1);
+		} else {
+			world.setBlockMetadataWithNotify(x, y, z, 0);
+		}
+	}
+	
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
+		if (par2 == 1) {
+			switch (par1) {
+			case 0:
+			case 1:
+				return 2;
+			case 2:
+			case 3:
+				return 0;
+			default:
+				return 1;
+			}
+		} else {
+			return getBlockTextureFromSide(par1);
+		}
+	}
 
 	@Override
 	public int getBlockTextureFromSide(int par1) {
@@ -99,11 +130,13 @@ public class BlockPetroleumGenerator extends BlockContainer {
 			return 2;
 		case 2:
 		case 3:
-			return 0;
+			return 3;
 		default:
 			return 1;
 		}
 	}
+	
+	
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {

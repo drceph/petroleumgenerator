@@ -175,6 +175,8 @@ public class TileEntityPetroleumGenerator extends TileEntity implements
 			} else {
 				active = 0;
 			}
+			
+			BlockPetroleumGenerator.updateBlockState(active==1, worldObj, xCoord, yCoord, zCoord);
 		
 		}
 		if (changed) {
