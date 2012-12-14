@@ -1,7 +1,5 @@
 /* Petroleum Generator: a Buildcraft/IndustrialCraft2 crossover mod for Minecraft.
  *
- * Version 0.4
- *
  * This software is available through the following channels:
  * http://github.com/chrisduran/petroleumgenerator
  *
@@ -49,7 +47,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "0.14")
+@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "1.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, clientPacketHandlerSpec = @SidedPacketHandler (channels = {"petrogen" }, packetHandler = drceph.petrogen.client.ClientPacketHandler.class),
 			serverPacketHandlerSpec =@SidedPacketHandler(channels = {"petrogen" }, packetHandler = drceph.petrogen.common.ServerPacketHandler.class))
 

@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 0.14
+version 1.0
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -94,6 +94,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+1.0:
+* Full release! Updated to IC v1.110 and BuildCraft 3.2.2. 
 
 0.14:
 * Updated default EU/bucket for fuel (again) to 300k. This is after some discussions on the IC2 and FTB forums with people who are better at balance than I.
