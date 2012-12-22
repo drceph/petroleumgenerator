@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 1.0
+version 1.1
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
@@ -94,6 +94,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+1.1:
+* Updated to MC 1.4.6, IC v1.112 and BuildCraft 3.3.0
 
 1.0:
 * Full release! Updated to IC v1.110 and BuildCraft 3.2.2. 
