@@ -26,9 +26,9 @@
 
 package drceph.petrogen.client;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import drceph.petrogen.common.CommonProxy;
 import drceph.petrogen.common.TileEntityPetroleumGenerator;

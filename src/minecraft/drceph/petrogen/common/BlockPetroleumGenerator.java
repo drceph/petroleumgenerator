@@ -30,22 +30,16 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
@@ -161,13 +155,13 @@ public class BlockPetroleumGenerator extends BlockContainer {
                             float ry = rand.nextFloat() * 0.8F + 0.1F;
                             float rz = rand.nextFloat() * 0.8F + 0.1F;
 
+                            ItemStack newItem = new ItemStack(item.itemID, item.stackSize, item.getItemDamage());
+                            if (item.hasTagCompound()) {
+                                newItem.setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+                            }
                             EntityItem entityItem = new EntityItem(world,
                                             x + rx, y + ry, z + rz,
-                                            new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
-
-                            if (item.hasTagCompound()) {
-                                    entityItem.item.setTagCompound((NBTTagCompound) item.getTagCompound().copy());
-                            }
+                                            newItem);
 
                             float factor = 0.05F;
                             entityItem.motionX = rand.nextGaussian() * factor;

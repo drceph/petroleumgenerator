@@ -27,9 +27,8 @@
 package drceph.petrogen.common;
 
 import ic2.api.Direction;
-import ic2.api.EnergyNet;
-import ic2.api.IEnergySource;
-import ic2.api.NetworkHelper;
+import ic2.api.energy.EnergyNet;
+import ic2.api.energy.tile.IEnergySource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,20 +36,18 @@ import java.util.Map;
 
 import buildcraft.BuildCraftEnergy;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 //import ic2.api.Direction;
 //import ic2.api.EnergyNet;
 //import ic2.api.IEnergySource;
 //import ic2.api.INetworkDataProvider;
 //import ic2.api.INetworkUpdateListener;
 //import ic2.api.NetworkHelper;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagInt;
-import net.minecraft.src.NBTTagList;
-import net.minecraft.src.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;

@@ -26,13 +26,13 @@
 
 package drceph.petrogen.client;
 
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.IInventory;
+
 import org.lwjgl.opengl.GL11;
 
 import drceph.petrogen.common.*;
-import net.minecraft.src.Container;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.GuiContainer;
-import net.minecraft.src.IInventory;
 
 public class GuiPetroleumGenerator extends GuiContainer {
 
