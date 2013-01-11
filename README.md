@@ -42,7 +42,7 @@ By comparison, the Biogenerator currently produces (as of Forestry 1.6):
 Crafting Recipe
 ---------------
 
-** Petroleum Generator **
+### Petroleum Generator
 
 The crafting recipe is as follows:
 
@@ -60,7 +60,7 @@ D = Water Cell
 In picture form:  
 ![xAx DBD DCD](https://raw.github.com/chrisduran/petroleumgenerator/6d5de2e67dcce4b41a191752f05ee6220276fa05/art/screenshots/crafting.png)
 
-** Traincraft oily sands and ore processing chain **
+### Traincraft oily sands and ore processing chain
 
 If Traincraft is installed PetroGen will enable a processing chain to convert the Oil Sands (oily sands) and Crude Oil (oily ore) from Traincraft into Petroleum Generator compatible BC oil. The conversion rate is 10x sands or 5x ore, plus work, giving one bucket of oil.
 
