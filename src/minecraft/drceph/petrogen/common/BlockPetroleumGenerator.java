@@ -39,6 +39,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -91,29 +92,52 @@ public class BlockPetroleumGenerator extends BlockContainer {
 	}
 	
 	public static void updateBlockState(boolean active, World world, int x, int y, int z) {
-		if (active) {
-			world.setBlockMetadataWithNotify(x, y, z, 1);
-		} else {
-			world.setBlockMetadataWithNotify(x, y, z, 0);
-		}
+		int currentMetadata = world.getBlockMetadata(x, y, z);
+		int newMetadata = active ? 1 : 0;
+		if (currentMetadata > 1) newMetadata += 2;
+		world.setBlockMetadataWithNotify(x,y,z,newMetadata);
 	}
 	
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		if (par2 == 1) {
-			switch (par1) {
-			case 0:
+		switch (par2) {
+			
 			case 1:
-				return 2;
+				switch (par1) {
+				case 0:
+				case 1:
+					return 2;
+				case 2:
+				case 3:
+					return 0;
+				default:
+					return 1;
+				}
 			case 2:
+				switch (par1) {
+				case 0:
+				case 1:
+					return 1;
+				case 2:
+				case 3:
+					return 1;
+				default:
+					return 3;
+				}
 			case 3:
-				return 0;
+				switch (par1) {
+				case 0:
+				case 1:
+					return 1;
+				case 2:
+				case 3:
+					return 1;
+				default:
+					return 0;
+				}
 			default:
-				return 1;
+				return getBlockTextureFromSide(par1);	
 			}
-		} else {
-			return getBlockTextureFromSide(par1);
-		}
 	}
 
 	@Override
@@ -130,7 +154,24 @@ public class BlockPetroleumGenerator extends BlockContainer {
 		}
 	}
 	
-	
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, net.minecraft.entity.EntityLiving player) {
+		
+		//from 0 to 3, inclusive	
+		int facing = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		PetroleumGenerator.log.info("Function gave: "+facing);
+		int currentMetadata = world.getBlockMetadata(x, y, z);
+		
+		switch (facing) {
+		case 1:
+		case 3:
+			world.setBlockMetadataWithNotify(x,y,z,currentMetadata+2);
+			break;
+		default:
+			world.setBlockMetadataWithNotify(x,y,z,currentMetadata);
+		}
+		
+	};
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {

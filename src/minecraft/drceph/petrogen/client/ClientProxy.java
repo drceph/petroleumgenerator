@@ -38,6 +38,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderThings() {
 		MinecraftForgeClient.preloadTexture("/drceph/petrogen/sprites/blocks.png");
+		MinecraftForgeClient.preloadTexture(ITEM_TEXTURE);
 	}
 	
 	@Override

@@ -1,12 +1,14 @@
 Petroleum Generator
 ===================
 
-version 1.1
+version 1.2
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
 
 This mod adds a Petroleum Generator to the game. This generator will produce EU directly from Buildcraft Fuel/Oil, which can be either pumped in using buildcraft liquid pipes, or manually deposited using containers. Want to burn some Biofuel in this? Tough. DrCeph Industries doesn't believe in the green revolution. It is just a fad that will pass, like hypercolor and scrunchies.
+
+Also recently added was an IC2-based processing chain to turn raw materials from TrainCraft (Oily Sands and Crude Oil ore) into Buildcraft oil. This chain is only enabled if TrainCraft is installed.
 
 Why another BC/IC conversion mod?
 ---------------------------------
@@ -39,6 +41,9 @@ By comparison, the Biogenerator currently produces (as of Forestry 1.6):
 
 Crafting Recipe
 ---------------
+
+** Petroleum Generator **
+
 The crafting recipe is as follows:
 
 x A x  
@@ -54,6 +59,19 @@ D = Water Cell
 
 In picture form:  
 ![xAx DBD DCD](https://raw.github.com/chrisduran/petroleumgenerator/6d5de2e67dcce4b41a191752f05ee6220276fa05/art/screenshots/crafting.png)
+
+** Traincraft oily sands and ore processing chain **
+
+If Traincraft is installed PetroGen will enable a processing chain to convert the Oil Sands (oily sands) and Crude Oil (oily ore) from Traincraft into Petroleum Generator compatible BC oil. The conversion rate is 10x sands or 5x ore, plus work, giving one bucket of oil.
+
+Step 1: Macerate ores into Bituminous Sludge (2x sands for 1 sludge, 1x ore for 1 sludge)   
+![Ore to Sludge](https://raw.github.com/chrisduran/petroleumgenerator/523f1a6e3264c2066928331feabc5f3b1e43caab/art/screenshots/TC_ores_to_sludge.png)
+
+Step 2: Craft 5x Bituminous Sludge and 1x Empty Bucket to get 1x Bituminous Sludge Bucket (shapeless recipe, non-reversable)   
+![Sludge to Sludge Bucket](https://raw.github.com/chrisduran/petroleumgenerator/523f1a6e3264c2066928331feabc5f3b1e43caab/art/screenshots/Sludge_to_sludge_bucket.png)
+
+Step 3: Extract 1x Bituminous Sludge Bucket into 1x Oil Bucket.   
+![Sludge Bucket to Oil Bucket](https://raw.github.com/chrisduran/petroleumgenerator/523f1a6e3264c2066928331feabc5f3b1e43caab/art/screenshots/Sludge_bucket_to_oil.png)
 
 Screenshots
 -----------
@@ -94,6 +112,10 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+1.2:
+* Block front panel now faces player on placement
+* Cross-mod compatability - now able to convert TrainCraft ores into Buildcraft oil.
 
 1.1:
 * Updated to MC 1.4.6, IC v1.112 and BuildCraft 3.3.0

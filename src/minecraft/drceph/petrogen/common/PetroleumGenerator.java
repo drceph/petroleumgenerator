@@ -24,16 +24,22 @@
 
 package drceph.petrogen.common;
 
+import ic2.api.Ic2Recipes;
+
+import java.util.List;
 import java.util.logging.Logger;
 
 import buildcraft.BuildCraftEnergy;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -47,7 +53,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "1.1")
+@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "1.2")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, clientPacketHandlerSpec = @SidedPacketHandler (channels = {"petrogen" }, packetHandler = drceph.petrogen.client.ClientPacketHandler.class),
 			serverPacketHandlerSpec =@SidedPacketHandler(channels = {"petrogen" }, packetHandler = drceph.petrogen.common.ServerPacketHandler.class))
 
@@ -73,8 +79,13 @@ public class PetroleumGenerator {
 	private int fuelMultiplier;
 	private int oilMultiplier;
 	private int petroleumGeneratorBlockId;
+	private int bituminousSludgeId;
+	private int bituminousSludgeBucketId;
+	private int bituminousBurnTime;
 	
 	public static Block petroleumGeneratorBlock;
+	public static ItemBituminousProduct bituminousSludgeItem = null;
+	public static ItemBituminousProduct bituminousSludgeBucketItem = null;
 	
 	@PreInit
 	public void load(FMLPreInitializationEvent event) {
@@ -93,6 +104,12 @@ public class PetroleumGenerator {
         fuelMultiplier = config.get(Configuration.CATEGORY_GENERAL, "fuel_multiplier", defaultFuelMultiplier).getInt();
         fuelMultiplier = Math.max(fuelMultiplier, 1);
         
+        bituminousSludgeId = config.getItem("itemBituminousSludge", 11855).getInt();
+        bituminousSludgeBucketId = config.getItem("itemBituminousSludgeBucket", 11856).getInt();
+        
+        bituminousBurnTime = config.get(Configuration.CATEGORY_GENERAL, "bituminous_sludge_burntime", 1200,"Default is 75% of coal burntime - set to zero to disable use of sludge as a fuel").getInt();
+        bituminousBurnTime = Math.max(bituminousBurnTime, 0);
+        
         config.save();
 		
 	}
@@ -101,11 +118,11 @@ public class PetroleumGenerator {
 	public void load(FMLInitializationEvent event) {
 		
 		petroleumGeneratorBlock = new BlockPetroleumGenerator(petroleumGeneratorBlockId,0);
-		petroleumGeneratorBlock.setBlockName("petroleumGeneratorBlock");
+		petroleumGeneratorBlock.setBlockName("blockPetroleumGenerator");
 		petroleumGeneratorBlock.setHardness(2.0f);
 		petroleumGeneratorBlock.setStepSound(Block.soundMetalFootstep);
 		
-		GameRegistry.registerBlock(petroleumGeneratorBlock);
+		GameRegistry.registerBlock(petroleumGeneratorBlock,"blockPetroleumGenerator");
 		MinecraftForge.setBlockHarvestLevel(petroleumGeneratorBlock, "pickaxe", 0);
 		LanguageRegistry.addName(petroleumGeneratorBlock, "Petroleum Generator");
 		ItemStack aStack = ic2.api.Items.getItem("generator");
@@ -121,6 +138,62 @@ public class PetroleumGenerator {
 		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketOil)),oilStep*oilMultiplier,oilPower,0);
 		new FuelPetroleumGenerator(LiquidContainerRegistry.getLiquidForFilledItem(new ItemStack(BuildCraftEnergy.bucketFuel)),fuelStep*fuelMultiplier,fuelPower,1);
 		
+		if (Loader.isModLoaded("TC")) {
+			log.info("TrainCraft found! Bituminising all the things.");
+			
+			//add sludge
+			bituminousSludgeItem = new ItemBituminousProduct(bituminousSludgeId);
+			bituminousSludgeItem.setMaxStackSize(64);
+			bituminousSludgeItem.setCreativeTab(CreativeTabs.tabMisc);
+			bituminousSludgeItem.setIconIndex(0);
+			bituminousSludgeItem.setItemName("bituminousSludge");
+			LanguageRegistry.addName(bituminousSludgeItem,"Bituminous Sludge");
+			
+			//add sludge bucket
+			bituminousSludgeBucketItem = new ItemBituminousProduct(bituminousSludgeBucketId);
+			bituminousSludgeBucketItem.setMaxStackSize(1);
+			bituminousSludgeBucketItem.setCreativeTab(CreativeTabs.tabMisc);
+			bituminousSludgeBucketItem.setIconIndex(1);
+			bituminousSludgeBucketItem.setItemName("bituminousSludgeBucket");
+			//bituminousSludgeBucketItem.setContainerItem(Item.bucketEmpty);
+			LanguageRegistry.addName(bituminousSludgeBucketItem,"Bituminous Sludge Bucket");
+			
+			//craft sludge into bucket
+			ItemStack sludgeBucketItemStack = new ItemStack(bituminousSludgeBucketItem);
+			ItemStack sludgeItemStack = new ItemStack(bituminousSludgeItem);
+			GameRegistry.addShapelessRecipe(sludgeBucketItemStack,
+					new ItemStack(Item.bucketEmpty),sludgeItemStack,sludgeItemStack,
+					sludgeItemStack,sludgeItemStack,sludgeItemStack);
+			
+			GameRegistry.registerFuelHandler(new FuelHandlerBituminousProduct(bituminousBurnTime));
+			
+			//GameRegistry.addShapelessRecipe(new ItemStack(bituminousSludgeItem,5), sludgeBucketItemStack);
+			
+			//IC2 PIPELINE
+			Ic2Recipes.addExtractorRecipe(sludgeBucketItemStack, new ItemStack(BuildCraftEnergy.bucketOil));
+			
+			List<ItemStack> oilsandsOre = OreDictionary.getOres("oilsandsOre");
+			log.info("Found " + oilsandsOre.size() + " oilsandsOre to process.");
+			
+			List<ItemStack> petroleumOre = OreDictionary.getOres("petroleumOre");
+			log.info("Found " + petroleumOre.size() + " petroleumOre to process.");
+			
+			for (ItemStack ore : oilsandsOre) {
+				Ic2Recipes.addMaceratorRecipe(
+						new ItemStack(ore.getItem(),2), 
+						sludgeItemStack);
+			}
+			
+			for (ItemStack ore : petroleumOre) {
+				Ic2Recipes.addMaceratorRecipe(
+						new ItemStack(ore.getItem(),1), 
+						sludgeItemStack);
+			}
+			
+		} else {
+			log.info("TrainCraft NOT found.. do nothing.");
+		}
+		
 		//log.info(FuelPetroleumGenerator.getFuelByItemId(4064).getEuPerLiquidUnit()+" in this many ticks: "+FuelPetroleumGenerator.getFuelByItemId(4064).getTicksForLiquidUnit());
 				
 		proxy.registerRenderThings();
@@ -128,5 +201,6 @@ public class PetroleumGenerator {
 		
 		
 	}
+
 	
 }

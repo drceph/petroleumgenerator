@@ -32,6 +32,9 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
 	
+	public static final String ITEM_TEXTURE = "/drceph/petrogen/sprites/items.png";
+	public static final String BLOCK_TEXTURE = "/drceph/petrogen/sprites/blocks.png";
+	
 	public void registerRenderThings() {
 		
 	}
