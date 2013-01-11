@@ -3,6 +3,9 @@ Petroleum Generator
 
 version 1.2
 
+### [DOWNLOAD THE LATEST VERSION](http://goo.gl/oGrTY)
+or [see all downloads](http://goo.gl/jya7H)
+
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
 Tasty on its own; Delicious served with a main course of [Forestry](http://forestry.sengir.net/wiki/).
 
