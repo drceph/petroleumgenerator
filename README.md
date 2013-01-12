@@ -1,7 +1,7 @@
 Petroleum Generator
 ===================
 
-version 1.2
+version 1.2.1
 
 ### [DOWNLOAD THE LATEST VERSION](http://goo.gl/oGrTY)
 or [see all downloads](http://goo.gl/jya7H)
@@ -115,6 +115,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 Changelog
 ---------
+
+1.2.1:
+* Fixed bug where naturally generated TC ore blocks would not macerate due to non-standard ore generation
 
 1.2:
 * Block front panel now faces player on placement

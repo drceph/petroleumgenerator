@@ -53,7 +53,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "1.2")
+@Mod(modid = "drceph.petrogen", name = "Petroleum Generator", version = "1.2.1")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, clientPacketHandlerSpec = @SidedPacketHandler (channels = {"petrogen" }, packetHandler = drceph.petrogen.client.ClientPacketHandler.class),
 			serverPacketHandlerSpec =@SidedPacketHandler(channels = {"petrogen" }, packetHandler = drceph.petrogen.common.ServerPacketHandler.class))
 
@@ -178,15 +178,22 @@ public class PetroleumGenerator {
 			List<ItemStack> petroleumOre = OreDictionary.getOres("petroleumOre");
 			log.info("Found " + petroleumOre.size() + " petroleumOre to process.");
 			
+			//second macerator recipes below to deal with non-standard ore generation
 			for (ItemStack ore : oilsandsOre) {
 				Ic2Recipes.addMaceratorRecipe(
 						new ItemStack(ore.getItem(),2), 
+						sludgeItemStack);
+				Ic2Recipes.addMaceratorRecipe(
+						new ItemStack(ore.getItem(),2,ore.itemID), 
 						sludgeItemStack);
 			}
 			
 			for (ItemStack ore : petroleumOre) {
 				Ic2Recipes.addMaceratorRecipe(
 						new ItemStack(ore.getItem(),1), 
+						sludgeItemStack);
+				Ic2Recipes.addMaceratorRecipe(
+						new ItemStack(ore.getItem(),1,ore.itemID), 
 						sludgeItemStack);
 			}
 			
