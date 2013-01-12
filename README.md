@@ -3,7 +3,7 @@ Petroleum Generator
 
 version 1.2.1
 
-### [DOWNLOAD THE LATEST VERSION](http://goo.gl/oGrTY)
+### [DOWNLOAD THE LATEST VERSION](http://goo.gl/LzusY)
 or [see all downloads](http://goo.gl/jya7H)
 
 A [buildcraft](http://www.mod-buildcraft.com)  <> [IC2](http://www.industrial-craft.net) crossover mod. 
@@ -11,7 +11,7 @@ Tasty on its own; Delicious served with a main course of [Forestry](http://fores
 
 This mod adds a Petroleum Generator to the game. This generator will produce EU directly from Buildcraft Fuel/Oil, which can be either pumped in using buildcraft liquid pipes, or manually deposited using containers. Want to burn some Biofuel in this? Tough. DrCeph Industries doesn't believe in the green revolution. It is just a fad that will pass, like hypercolor and scrunchies.
 
-Also recently added was an IC2-based processing chain to turn raw materials from TrainCraft (Oily Sands and Crude Oil ore) into Buildcraft oil. This chain is only enabled if TrainCraft is installed.
+Also recently added was an IC2-based processing chain to turn raw materials from [TrainCraft](http://www.minecraftforum.net/topic/1587267-146sspsmplanforgetraincraft-formerly-trains-zeppelin-mod/) (Oily Sands and Crude Oil ore) into Buildcraft oil. This chain is only enabled if TrainCraft is installed.
 
 Why another BC/IC conversion mod?
 ---------------------------------
